@@ -17,20 +17,18 @@ export default class GifDetail extends Component {
       return <div>Loading...</div>;
     }
 
-    const {
-      fixed_width_downsampled_url,
-      title,
-      image_original_url
-    } = this.props.gif;
+    const { fixed_width_downsampled_url, title, image_original_url } =
+      this.props.gif;
     const githubEmbed = `![LGTM](${image_original_url})`;
     const copyButtonIcon = this.state.copied ? "check" : "clipboard";
     const copyText = this.state.copied ? "copied!" : "copy to clipboard";
+    const copyButtonColor = this.state.copied ? "ui positive button" : "";
 
     return (
       <div className="ui centered card">
-        <div className="image">
+        <div className="image"  >
           <img
-            className="ui medium rounded image"
+            className="ui medium rounded image" style={{maxHeight:'180px'}}
             src={fixed_width_downsampled_url}
             alt={title}
           />
@@ -40,9 +38,11 @@ export default class GifDetail extends Component {
             {githubEmbed}
           </div>
         </div>
+        <div></div>
         <CopyToClipboard text={githubEmbed} onCopy={this.onCopyClick}>
-          <div className="ui bottom attached button">
+          <div className={`ui bottom attached button ${copyButtonColor}`}  >
             <i className={`${copyButtonIcon} icon`} />
+            
             {copyText}
           </div>
         </CopyToClipboard>
